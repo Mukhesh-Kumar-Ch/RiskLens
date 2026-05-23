@@ -173,9 +173,13 @@ These observations reinforced the importance of coefficient-level interpretation
 
 ## Visualizations
 
-### Logistic Regression Feature Importance
+### Mathematics Dataset Feature Coefficients
 
-![Feature Coefficients](results/figures/feature_coefficients.png)
+![Math Feature Coefficients](results/figures/math_feature_coefficients.png)
+
+### Portuguese Dataset Feature Coefficients
+
+![Portuguese Feature Coefficients](results/figures/portuguese_feature_coefficients.png)
 
 ---
 
