@@ -4,27 +4,55 @@ Handles feature creation and transformation
 """
 
 import pandas as pd
-import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 
 def create_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Create new features from existing columns"""
+    """
+    Create the full set of engineered features for the dataset.
+    """
     df_copy = df.copy()
-    # Add feature engineering logic here
+
+    df_copy = add_grade_change(df_copy)
+    df_copy = add_famsup_effective(df_copy)
+
     return df_copy
 
 
-def scale_features(df: pd.DataFrame, columns: list) -> pd.DataFrame:
-    """Scale numerical features"""
-    scaler = StandardScaler()
+def add_grade_change(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create grade_change feature using:
+    grade_change = G2 - G1
+    """
+
     df_copy = df.copy()
-    df_copy[columns] = scaler.fit_transform(df[columns])
+
+    df_copy["grade_change"] = (
+        df_copy["G2"] - df_copy["G1"]
+    )
+
     return df_copy
 
 
-def encode_categorical(df: pd.DataFrame, columns: list) -> pd.DataFrame:
-    """Encode categorical features"""
+def add_famsup_effective(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create famsup_effective feature.
+
+    Logic:
+    If family educational support exists:
+        famsup_effective = Medu + Fedu
+    Else:
+        famsup_effective = 0
+    """
+
     df_copy = df.copy()
-    df_copy = pd.get_dummies(df_copy, columns=columns, drop_first=True)
+
+    famsup_mask = (
+        df_copy["famsup"] == "yes"
+    )
+
+    df_copy["famsup_effective"] = (
+        (df_copy["Medu"] + df_copy["Fedu"])
+        .where(famsup_mask, 0)
+    )
+
     return df_copy
