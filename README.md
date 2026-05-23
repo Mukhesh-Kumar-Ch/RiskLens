@@ -245,6 +245,22 @@ Potential future extensions include:
 
 ---
 
+## Skills Demonstrated
+
+- Supervised Machine Learning
+- Logistic Regression
+- Feature Engineering
+- Exploratory Data Analysis
+- Multivariate Analysis
+- Model Interpretability
+- Cross-Dataset Validation
+- Data Visualization
+- Python
+- Pandas
+- Scikit-learn
+- Statistical Reasoning
+
+
 ## Project Structure
 
 ```text
